@@ -2,18 +2,10 @@ namespace Arkanoid.Core
 {
     using Arkanoid.Models;
 
-    /// <summary>
-    /// Статический класс для обработки коллизий между игровыми объектами
-    /// Реализует проверку столкновений и расчет нормалей отражения
-    /// </summary>
+    // Статический класс для обработки коллизий между игровыми объектами
     public static class CollisionSystem
     {
-        /// <summary>
-        /// Проверяет столкновение мяча с платформой
-        /// </summary>
-        /// <param name="ball">Мяч для проверки</param>
-        /// <param name="paddle">Платформа для проверки</param>
-        /// <returns>True если произошло столкновение, иначе false</returns>
+        // Проверяет столкновение мяча с платформой
         public static bool CheckBallPaddleCollision(Ball ball, Paddle paddle)
         {
             if (!ball.IsActive)
@@ -37,12 +29,7 @@ namespace Arkanoid.Core
             return distanceSquared < (ballRadius * ballRadius);
         }
 
-        /// <summary>
-        /// Обрабатывает столкновение мяча с платформой и отражает мяч
-        /// </summary>
-        /// <param name="ball">Мяч</param>
-        /// <param name="paddle">Платформа</param>
-        /// <returns>True если произошло столкновение и мяч был отражен</returns>
+        // Обрабатывает столкновение мяча с платформой и отражает мяч
         public static bool HandleBallPaddleCollision(Ball ball, Paddle paddle)
         {
             if (!CheckBallPaddleCollision(ball, paddle))
@@ -94,12 +81,7 @@ namespace Arkanoid.Core
             return false;
         }
 
-        /// <summary>
-        /// Проверяет столкновение мяча с кирпичом
-        /// </summary>
-        /// <param name="ball">Мяч для проверки</param>
-        /// <param name="brick">Кирпич для проверки</param>
-        /// <returns>True если произошло столкновение, иначе false</returns>
+        // Проверяет столкновение мяча с кирпичом
         public static bool CheckBallBrickCollision(Ball ball, Brick brick)
         {
             if (!ball.IsActive || brick.IsDestroyed)
@@ -123,12 +105,7 @@ namespace Arkanoid.Core
             return distanceSquared < (ballRadius * ballRadius);
         }
 
-        /// <summary>
-        /// Обрабатывает столкновение мяча с кирпичом и отражает мяч
-        /// </summary>
-        /// <param name="ball">Мяч</param>
-        /// <param name="brick">Кирпич</param>
-        /// <returns>True если произошло столкновение и мяч был отражен</returns>
+        // Обрабатывает столкновение мяча с кирпичом и отражает мяч
         public static bool HandleBallBrickCollision(Ball ball, Brick brick)
         {
             if (!CheckBallBrickCollision(ball, brick))
@@ -183,12 +160,7 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Проверяет столкновение мяча со стенами игрового поля
-        /// </summary>
-        /// <param name="ball">Мяч для проверки</param>
-        /// <param name="field">Игровое поле</param>
-        /// <returns>True если произошло столкновение, иначе false</returns>
+        // Проверяет столкновение мяча со стенами игрового поля
         public static bool CheckBallWallCollision(Ball ball, GameField field)
         {
             if (!ball.IsActive)
@@ -220,12 +192,7 @@ namespace Arkanoid.Core
             return false;
         }
 
-        /// <summary>
-        /// Обрабатывает столкновение мяча со стенами и отражает мяч
-        /// </summary>
-        /// <param name="ball">Мяч</param>
-        /// <param name="field">Игровое поле</param>
-        /// <returns>True если произошло столкновение и мяч был отражен</returns>
+        // Обрабатывает столкновение мяча со стенами и отражает мяч
         public static bool HandleBallWallCollision(Ball ball, GameField field)
         {
             if (!ball.IsActive)
@@ -261,12 +228,7 @@ namespace Arkanoid.Core
             return collision;
         }
 
-        /// <summary>
-        /// Проверяет, упал ли мяч за нижнюю границу поля (потеря жизни)
-        /// </summary>
-        /// <param name="ball">Мяч для проверки</param>
-        /// <param name="field">Игровое поле</param>
-        /// <returns>True если мяч упал за нижнюю границу</returns>
+        // Проверяет, упал ли мяч за нижнюю границу поля (потеря жизни)
         public static bool CheckBallOutOfBounds(Ball ball, GameField field)
         {
             if (!ball.IsActive)

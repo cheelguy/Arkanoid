@@ -1,81 +1,30 @@
 namespace Arkanoid.Core
 {
-    /// <summary>
-    /// Перечисление состояний игры
-    /// </summary>
+    // Перечисление состояний игры
     public enum GameStateType
     {
-        /// <summary>
-        /// Главное меню
-        /// </summary>
-        Menu,
-
-        /// <summary>
-        /// Игра в процессе
-        /// </summary>
-        Playing,
-
-        /// <summary>
-        /// Игра на паузе
-        /// </summary>
-        Paused,
-
-        /// <summary>
-        /// Игра окончена (проигрыш)
-        /// </summary>
-        GameOver,
-
-        /// <summary>
-        /// Победа (все уровни пройдены)
-        /// </summary>
-        Victory,
-
-        /// <summary>
-        /// Уровень завершен
-        /// </summary>
-        LevelComplete
+        Menu,           // Главное меню
+        Playing,         // Игра в процессе
+        Paused,          // Игра на паузе
+        GameOver,        // Игра окончена (проигрыш)
+        Victory,         // Победа (все уровни пройдены)
+        LevelComplete    // Уровень завершен
     }
 
-    /// <summary>
-    /// Класс управления состоянием игры
-    /// Отвечает за отслеживание текущего состояния, жизней, уровня и валидацию переходов
-    /// </summary>
+    // Класс управления состоянием игры
     public class GameState
     {
-        /// <summary>
-        /// Текущее состояние игры
-        /// </summary>
         public GameStateType CurrentState { get; private set; }
-
-        /// <summary>
-        /// Количество жизней игрока
-        /// </summary>
         public int Lives { get; private set; }
-
-        /// <summary>
-        /// Текущий уровень
-        /// </summary>
         public int CurrentLevel { get; private set; }
-
-        /// <summary>
-        /// Флаг, указывающий запущена ли игра
-        /// </summary>
+        
+        // Флаг, указывающий запущена ли игра
         public bool IsGameRunning => CurrentState == GameStateType.Playing || 
                                      CurrentState == GameStateType.Paused;
 
-        /// <summary>
-        /// Константа начального количества жизней
-        /// </summary>
         public const int InitialLives = 3;
-
-        /// <summary>
-        /// Константа начального уровня
-        /// </summary>
         public const int InitialLevel = 1;
 
-        /// <summary>
-        /// Конструктор по умолчанию
-        /// </summary>
         public GameState()
         {
             CurrentState = GameStateType.Menu;
@@ -83,11 +32,6 @@ namespace Arkanoid.Core
             CurrentLevel = InitialLevel;
         }
 
-        /// <summary>
-        /// Конструктор с начальными параметрами
-        /// </summary>
-        /// <param name="initialLives">Начальное количество жизней</param>
-        /// <param name="initialLevel">Начальный уровень</param>
         public GameState(int initialLives, int initialLevel = InitialLevel)
         {
             CurrentState = GameStateType.Menu;
@@ -95,11 +39,7 @@ namespace Arkanoid.Core
             CurrentLevel = initialLevel;
         }
 
-        /// <summary>
-        /// Начинает новую игру
-        /// </summary>
-        /// <param name="startLevel">Уровень, с которого начать</param>
-        /// <returns>True если переход выполнен успешно</returns>
+        // Начинает новую игру
         public bool StartGame(int startLevel = InitialLevel)
         {
             if (CurrentState != GameStateType.Menu && 
@@ -115,10 +55,7 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Ставит игру на паузу
-        /// </summary>
-        /// <returns>True если переход выполнен успешно</returns>
+        // Ставит игру на паузу
         public bool Pause()
         {
             if (CurrentState != GameStateType.Playing)
@@ -130,10 +67,7 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Возобновляет игру с паузы
-        /// </summary>
-        /// <returns>True если переход выполнен успешно</returns>
+        // Возобновляет игру с паузы
         public bool Resume()
         {
             if (CurrentState != GameStateType.Paused)
@@ -145,10 +79,7 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Завершает текущий уровень
-        /// </summary>
-        /// <returns>True если переход выполнен успешно</returns>
+        // Завершает текущий уровень
         public bool CompleteLevel()
         {
             if (CurrentState != GameStateType.Playing)
@@ -160,11 +91,7 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Переходит на следующий уровень
-        /// </summary>
-        /// <param name="maxLevels">Максимальное количество уровней</param>
-        /// <returns>True если переход выполнен успешно</returns>
+        // Переходит на следующий уровень
         public bool NextLevel(int maxLevels = int.MaxValue)
         {
             if (CurrentState != GameStateType.LevelComplete)
@@ -187,10 +114,7 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Обрабатывает потерю жизни
-        /// </summary>
-        /// <returns>True если игра должна продолжиться, false если игра окончена</returns>
+        // Обрабатывает потерю жизни
         public bool LoseLife()
         {
             if (CurrentState != GameStateType.Playing)
@@ -210,34 +134,25 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Добавляет жизнь (для бонусов)
-        /// </summary>
+        // Добавляет жизнь (для бонусов)
         public void AddLife()
         {
             Lives++;
         }
 
-        /// <summary>
-        /// Завершает игру с поражением
-        /// </summary>
+        // Завершает игру с поражением
         public void GameOver()
         {
             CurrentState = GameStateType.GameOver;
         }
 
-        /// <summary>
-        /// Завершает игру с победой
-        /// </summary>
+        // Завершает игру с победой
         public void Victory()
         {
             CurrentState = GameStateType.Victory;
         }
 
-        /// <summary>
-        /// Возвращает в главное меню
-        /// </summary>
-        /// <returns>True если переход выполнен успешно</returns>
+        // Возвращает в главное меню
         public bool ReturnToMenu()
         {
             if (CurrentState == GameStateType.Menu)
@@ -249,9 +164,7 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Сбрасывает состояние игры к начальным значениям
-        /// </summary>
+        // Сбрасывает состояние игры к начальным значениям
         public void Reset()
         {
             CurrentState = GameStateType.Menu;
@@ -259,11 +172,7 @@ namespace Arkanoid.Core
             CurrentLevel = InitialLevel;
         }
 
-        /// <summary>
-        /// Проверяет, можно ли перейти из текущего состояния в указанное
-        /// </summary>
-        /// <param name="targetState">Целевое состояние</param>
-        /// <returns>True если переход допустим</returns>
+        // Проверяет, можно ли перейти из текущего состояния в указанное
         public bool CanTransitionTo(GameStateType targetState)
         {
             return CurrentState switch
@@ -283,11 +192,7 @@ namespace Arkanoid.Core
             };
         }
 
-        /// <summary>
-        /// Безопасно переходит в указанное состояние с валидацией
-        /// </summary>
-        /// <param name="targetState">Целевое состояние</param>
-        /// <returns>True если переход выполнен успешно</returns>
+        // Безопасно переходит в указанное состояние с валидацией
         public bool TransitionTo(GameStateType targetState)
         {
             if (!CanTransitionTo(targetState))
@@ -299,9 +204,6 @@ namespace Arkanoid.Core
             return true;
         }
 
-        /// <summary>
-        /// Получает строковое представление текущего состояния
-        /// </summary>
         public override string ToString()
         {
             return $"GameState(State: {CurrentState}, Lives: {Lives}, Level: {CurrentLevel})";
