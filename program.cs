@@ -105,7 +105,22 @@ namespace Arkanoid
                 // Обновляем игру (если не на паузе)
                 if (gameEngine.GameState.CurrentState == GameStateType.Playing)
                 {
+                    // Сохраняем список кирпичей которые были разрушены ПЕРЕД обновлением
+                    var bricksBeforeUpdate = gameEngine.GameObjects.Bricks
+                        .Where(b => !b.IsDestroyed)
+                        .Select(b => new { Brick = b, WasDestroyed = false })
+                        .ToList();
+                    
                     gameEngine.Update(deltaTime);
+                    
+                    // Проверяем какие кирпичи стали разрушенными и начисляем очки
+                    foreach (var brickInfo in bricksBeforeUpdate)
+                    {
+                        if (brickInfo.Brick.IsDestroyed)
+                        {
+                            scoreManager.AddScore(brickInfo.Brick.GetPoints());
+                        }
+                    }
                     
                     // Если мяч неактивен (после потери жизни), запускаем его снова
                     if (!gameEngine.GameObjects.Ball.IsActive && gameEngine.GameState.Lives > 0)
@@ -151,12 +166,7 @@ namespace Arkanoid
                     }
                 }
 
-                // Добавляем очки за разрушенные кирпичи
-                var destroyedBricks = gameEngine.GameObjects.Bricks.Where(b => b.IsDestroyed).ToList();
-                foreach (var brick in destroyedBricks)
-                {
-                    scoreManager.AddScore(brick.GetPoints());
-                }
+                // Удаляем разрушенные кирпичи (очки уже начислены выше)
                 gameEngine.GameObjects.Bricks.RemoveAll(b => b.IsDestroyed);
 
                 // Ограничиваем FPS
