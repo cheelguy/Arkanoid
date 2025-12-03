@@ -53,7 +53,7 @@ namespace Arkanoid.Models
         {
             Position = new Vector2(40, 25);
             Velocity = new Vector2(0, -1);
-            Radius = 0.5f;
+            Radius = 2f;
             Speed = 8f; // Уменьшена скорость для лучшей играбельности
             IsActive = false;
         }
