@@ -106,6 +106,13 @@ namespace Arkanoid
                 if (gameEngine.GameState.CurrentState == GameStateType.Playing)
                 {
                     gameEngine.Update(deltaTime);
+                    
+                    // Если мяч неактивен (после потери жизни), запускаем его снова
+                    if (!gameEngine.GameObjects.Ball.IsActive && gameEngine.GameState.Lives > 0)
+                    {
+                        Thread.Sleep(500); // Пауза перед новым запуском
+                        gameEngine.GameObjects.Ball.Launch(0);
+                    }
                 }
 
                 // Отрисовываем кадр
