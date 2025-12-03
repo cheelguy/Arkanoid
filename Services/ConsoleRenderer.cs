@@ -32,8 +32,15 @@ namespace Arkanoid.Services
         /// </summary>
         public ConsoleRenderer()
         {
-            _bufferWidth = Console.WindowWidth;
-            _bufferHeight = Console.WindowHeight;
+            // Используем безопасные размеры по умолчанию
+            // На macOS размер окна может быть очень большим
+            _bufferWidth = Math.Min(Console.WindowWidth, 120);
+            _bufferHeight = Math.Min(Console.WindowHeight, 40);
+            
+            // Минимальные размеры
+            if (_bufferWidth < 80) _bufferWidth = 80;
+            if (_bufferHeight < 30) _bufferHeight = 30;
+            
             InitializeBuffer();
         }
 
