@@ -174,14 +174,27 @@ namespace Arkanoid
                 scoreManager.SaveHighScore();
             }
 
-            Console.WriteLine("\nНажмите любую клавишу для выхода...");
-            try
+            Console.WriteLine("\nНажмите Enter для новой игры или Esc для выхода...");
+            
+            // Ждем решения игрока
+            bool waitingForChoice = true;
+            while (waitingForChoice)
             {
-                Console.ReadKey();
-            }
-            catch
-            {
-                Thread.Sleep(3000);
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        // Перезапускаем игру
+                        Main(args);
+                        return;
+                    }
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        waitingForChoice = false;
+                    }
+                }
+                Thread.Sleep(50);
             }
         }
     }
