@@ -207,6 +207,9 @@ namespace Arkanoid.Core
             {
                 ball.ReflectHorizontal();
                 ball.Position = new Vector2(field.Left + ballRadius, ballPos.Y);
+                
+                // Предотвращаем горизонтальный полет
+                PreventHorizontalTrajectory(ball);
                 collision = true;
             }
             // Проверяем и обрабатываем столкновение с правой стеной
@@ -214,6 +217,9 @@ namespace Arkanoid.Core
             {
                 ball.ReflectHorizontal();
                 ball.Position = new Vector2(field.Right - ballRadius, ballPos.Y);
+                
+                // Предотвращаем горизонтальный полет
+                PreventHorizontalTrajectory(ball);
                 collision = true;
             }
 
@@ -226,6 +232,36 @@ namespace Arkanoid.Core
             }
 
             return collision;
+        }
+
+        /// <summary>
+        /// Предотвращает слишком горизонтальную траекторию мяча
+        /// Мяч "магнитится" к кирпичам, добавляя вертикальную составляющую
+        /// </summary>
+        private static void PreventHorizontalTrajectory(Ball ball)
+        {
+            // Минимум 30% от скорости должно быть вертикально
+            float minVerticalSpeed = ball.Speed * 0.3f;
+            
+            // Если вертикальная составляющая слишком мала
+            if (Math.Abs(ball.Velocity.Y) < minVerticalSpeed)
+            {
+                // Направляем к кирпичам (к верхней части поля)
+                float newVerticalSpeed = ball.Velocity.Y >= 0 ? minVerticalSpeed : -minVerticalSpeed;
+                
+                // Пересчитываем горизонтальную составляющую для сохранения общей скорости
+                float speedSquared = ball.Speed * ball.Speed;
+                float newHorizontalSquared = speedSquared - (newVerticalSpeed * newVerticalSpeed);
+                
+                if (newHorizontalSquared > 0)
+                {
+                    float newHorizontal = (float)Math.Sqrt(newHorizontalSquared);
+                    // Сохраняем направление горизонтального движения
+                    newHorizontal = ball.Velocity.X > 0 ? newHorizontal : -newHorizontal;
+                    
+                    ball.Velocity = new Vector2(newHorizontal, newVerticalSpeed);
+                }
+            }
         }
 
         // Проверяет, упал ли мяч за нижнюю границу поля (потеря жизни)
