@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <!-- Сохраняем все типы из Avalonia -->
+  <assembly fullname="Avalonia.Base" preserve="all"/>
+  <assembly fullname="Avalonia.Controls" preserve="all"/>
+  <assembly fullname="Avalonia.Themes.Fluent" preserve="all"/>
+  <assembly fullname="Avalonia.Desktop" preserve="all"/>
+  <assembly fullname="Avalonia" preserve="all"/>
+  
+  <!-- Сохраняем все типы из нашего приложения -->
+  <assembly fullname="Arkanoid" preserve="all"/>
+</linker>
+
