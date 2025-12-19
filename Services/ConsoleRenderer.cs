@@ -134,6 +134,7 @@ namespace Arkanoid.Services
 
         /// <summary>
         /// Выводит буфер на экран с поддержкой цветов
+        /// Оптимизированная версия: собирает строки одного цвета и выводит их за раз
         /// </summary>
         private void FlushBuffer()
         {
@@ -144,12 +145,40 @@ namespace Arkanoid.Services
 
             for (int y = 0; y < _bufferHeight; y++)
             {
+                ConsoleColor currentColor = _colorBuffer[0, y];
+                Console.ForegroundColor = currentColor;
+                System.Text.StringBuilder line = new System.Text.StringBuilder(_bufferWidth);
+                
                 for (int x = 0; x < _bufferWidth; x++)
                 {
                     char c = _buffer[x, y];
                     ConsoleColor color = _colorBuffer[x, y];
-                    Console.ForegroundColor = color;
-                    Console.Write(c);
+                    
+                    // Если цвет изменился, выводим накопленную строку и меняем цвет
+                    if (color != currentColor)
+                    {
+                        if (line.Length > 0)
+                        {
+                            Console.Write(line.ToString());
+                            line.Clear();
+                        }
+                        Console.ForegroundColor = color;
+                        currentColor = color;
+                    }
+                    
+                    line.Append(c);
+                }
+                
+                // Выводим оставшуюся часть строки
+                if (line.Length > 0)
+                {
+                    Console.Write(line.ToString());
+                }
+                
+                // Переходим на новую строку только если не последняя
+                if (y < _bufferHeight - 1)
+                {
+                    Console.WriteLine();
                 }
             }
 
