@@ -14,7 +14,7 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
     <PublishReadyToRun>false</PublishReadyToRun>
-    <PublishSingleFile>true</PublishSingleFile>
+    <PublishSingleFile>false</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
     <SelfContained>true</SelfContained>
   </PropertyGroup>
