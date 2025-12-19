@@ -8,10 +8,8 @@
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <!-- Оптимизации для уменьшения размера -->
-    <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>link</TrimMode>
-    <!-- Отключаем сжатие, чтобы избежать ошибки self-protection failed -->
+    <!-- Отключаем тримминг и сжатие для стабильной работы -->
+    <PublishTrimmed>false</PublishTrimmed>
     <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
@@ -36,9 +34,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <TrimmerRootDescriptor Include="ILLink.Descriptors.xml" />
-  </ItemGroup>
 
 </Project>
 
