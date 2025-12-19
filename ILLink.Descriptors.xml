@@ -8,7 +8,6 @@
   <assembly fullname="Avalonia" preserve="all"/>
   <assembly fullname="Avalonia.Win32" preserve="all"/>
   <assembly fullname="Avalonia.Markup.Xaml" preserve="all"/>
-  <assembly fullname="Avalonia.Data.Core" preserve="all"/>
   
   <!-- Сохраняем все типы из нашего приложения -->
   <assembly fullname="Arkanoid" preserve="all"/>
