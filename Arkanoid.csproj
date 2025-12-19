@@ -9,5 +9,11 @@
     <StartupObject>Arkanoid.Program</StartupObject>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Arkanoid.Tests/**" />
+    <EmbeddedResource Remove="Arkanoid.Tests/**" />
+    <None Remove="Arkanoid.Tests/**" />
+  </ItemGroup>
+
 </Project>
 
