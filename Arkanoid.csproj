@@ -27,5 +27,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <TrimmerRootDescriptor Include="ILLink.Descriptors.xml" />
+  </ItemGroup>
+
 </Project>
 

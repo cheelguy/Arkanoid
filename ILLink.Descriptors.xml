@@ -1,0 +1,12 @@
+<linker>
+  <!-- Keep all members of Avalonia.Styling.Style, otherwise Avalonia UI might not work correctly after trimming -->
+  <type fullname="Avalonia.Styling.Style" preserve="all" />
+  <type fullname="Avalonia.Markup.Xaml.Styling.StyleInclude" preserve="all" />
+  <type fullname="Avalonia.Controls.ApplicationLifetimes.ClassicDesktopStyleApplicationLifetime" preserve="all" />
+  <type fullname="Avalonia.Controls.ApplicationLifetimes.ISingleViewApplicationLifetime" preserve="all" />
+  <type fullname="Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime" preserve="all" />
+  <!-- Keep XAML loader types -->
+  <type fullname="Avalonia.Markup.Xaml.AvaloniaXamlLoader" preserve="all" />
+  <!-- Keep platform detection -->
+  <type fullname="Avalonia.Platform.PlatformManager" preserve="all" />
+</linker>
