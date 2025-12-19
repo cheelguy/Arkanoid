@@ -1,12 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <linker>
-  <!-- Keep all members of Avalonia.Styling.Style, otherwise Avalonia UI might not work correctly after trimming -->
-  <type fullname="Avalonia.Styling.Style" preserve="all" />
-  <type fullname="Avalonia.Markup.Xaml.Styling.StyleInclude" preserve="all" />
-  <type fullname="Avalonia.Controls.ApplicationLifetimes.ClassicDesktopStyleApplicationLifetime" preserve="all" />
-  <type fullname="Avalonia.Controls.ApplicationLifetimes.ISingleViewApplicationLifetime" preserve="all" />
-  <type fullname="Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime" preserve="all" />
-  <!-- Keep XAML loader types -->
-  <type fullname="Avalonia.Markup.Xaml.AvaloniaXamlLoader" preserve="all" />
-  <!-- Keep platform detection -->
-  <type fullname="Avalonia.Platform.PlatformManager" preserve="all" />
+  <!-- Сохраняем все типы из Avalonia для стабильной работы -->
+  <assembly fullname="Avalonia.Base" preserve="all"/>
+  <assembly fullname="Avalonia.Controls" preserve="all"/>
+  <assembly fullname="Avalonia.Themes.Fluent" preserve="all"/>
+  <assembly fullname="Avalonia.Desktop" preserve="all"/>
+  <assembly fullname="Avalonia" preserve="all"/>
+  <assembly fullname="Avalonia.Win32" preserve="all"/>
+  <assembly fullname="Avalonia.Markup.Xaml" preserve="all"/>
+  <assembly fullname="Avalonia.Data.Core" preserve="all"/>
+  
+  <!-- Сохраняем все типы из нашего приложения -->
+  <assembly fullname="Arkanoid" preserve="all"/>
 </linker>
