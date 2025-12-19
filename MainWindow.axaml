@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:Arkanoid"
+        x:Class="Arkanoid.MainWindow"
+        Title="Arkanoid"
+        Width="900"
+        Height="700"
+        WindowStartupLocation="CenterScreen"
+        Background="#1a1a1a">
+    <Grid>
+        <local:GameView x:Name="GameViewControl" />
+    </Grid>
+</Window>
+

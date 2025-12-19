@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Arkanoid.GameView"
+             Background="#000000">
+    <Grid>
+        <Canvas x:Name="GameCanvas" 
+                Background="#000000"
+                ClipToBounds="True" />
+        <StackPanel VerticalAlignment="Top" 
+                    HorizontalAlignment="Left" 
+                    Margin="10"
+                    Spacing="5">
+            <TextBlock x:Name="ScoreText" 
+                      Foreground="White" 
+                      FontSize="18" 
+                      FontWeight="Bold" />
+            <TextBlock x:Name="LivesText" 
+                      Foreground="White" 
+                      FontSize="18" 
+                      FontWeight="Bold" />
+            <TextBlock x:Name="LevelText" 
+                      Foreground="White" 
+                      FontSize="18" 
+                      FontWeight="Bold" />
+        </StackPanel>
+        <StackPanel x:Name="MenuPanel" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"
+                   Spacing="20"
+                   IsVisible="True">
+            <TextBlock Text="ARKANOID" 
+                      Foreground="White" 
+                      FontSize="48" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Center" />
+            <TextBlock x:Name="MenuText" 
+                      Text="Нажмите ENTER для начала игры" 
+                      Foreground="Yellow" 
+                      FontSize="24"
+                      HorizontalAlignment="Center" />
+        </StackPanel>
+        <StackPanel x:Name="GameOverPanel" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"
+                   Spacing="20"
+                   IsVisible="False">
+            <TextBlock x:Name="GameOverText" 
+                      Text="GAME OVER" 
+                      Foreground="Red" 
+                      FontSize="48" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Center" />
+            <TextBlock x:Name="FinalScoreText" 
+                      Foreground="White" 
+                      FontSize="24"
+                      HorizontalAlignment="Center" />
+            <TextBlock Text="Нажмите ENTER для новой игры или ESC для выхода" 
+                      Foreground="Yellow" 
+                      FontSize="18"
+                      HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>
+
